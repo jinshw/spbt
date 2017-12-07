@@ -1,0 +1,58 @@
+<!--图片下载-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+        }
+    </style>
+
+    <script>
+        var img = new Image();
+        img.src = '../img/rhino.jpg';
+        img.onload = function () {
+            draw(this);
+        };
+
+        function draw(img) {
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            img.style.display = 'none';
+            var zoomctx = document.getElementById('zoom').getContext('2d');
+
+            var smoothbtn = document.getElementById('smoothbtn');
+            var toggleSmoothing = function (event) {
+                var locationImg = canvas.toDataURL("image/png")
+//                var locationImg = canvas.toDataURL("image/png").replace("image/png","image/octet-stream")
+//                window.location.href=locationImg
+                var w = window.open('about:blank', 'image from canvas');
+                w.document.write("<img src='" + locationImg + "' alt='from canvas'/>");
+            };
+            smoothbtn.addEventListener('click', toggleSmoothing);
+
+            var zoom = function (event) {
+                var x = event.layerX;
+                var y = event.layerY;
+                zoomctx.drawImage(canvas,
+                    Math.abs(x - 5),
+                    Math.abs(y - 5),
+                    10, 10,
+                    0, 0,
+                    200, 200);
+            };
+
+            canvas.addEventListener('mousemove', zoom);
+        }
+
+    </script>
+</head>
+<body onload="">
+<canvas id="canvas" height="400" width="400"></canvas>
+<canvas id="zoom" height="400" width="400"></canvas>
+<input type="button" id="smoothbtn" value="download">
+</body>
+</html>

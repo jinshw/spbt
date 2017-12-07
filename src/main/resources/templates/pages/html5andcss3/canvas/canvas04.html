@@ -1,0 +1,43 @@
+<!--使用图片-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+        }
+    </style>
+
+    <script>
+        function darw() {
+            var canvas = document.getElementById("canvas")
+            var ctx;
+            if (canvas.getContext) {
+                ctx = canvas.getContext("2d")
+            } else {
+                alert("浏览器不支持canvas")
+            }
+
+            /*var img = new Image()
+            img.onload = function () {
+                for (var i=0;i<10;i++){
+                    for (var j=0;j<9;j++){
+                        ctx.drawImage(img,j*50,i*38,50,38);
+                    }
+                }
+            }
+            img.src = "../img/p.png"*/
+            ctx.drawImage(document.getElementById("frame"),0,0,100,100)
+            ctx.drawImage(document.getElementById("source"),630,160,700,700,14,14,72,72)
+
+        }
+    </script>
+</head>
+<body onload="darw()">
+<canvas id="canvas" height="1000" width="1000"></canvas>
+<img id="frame" src="../img/f.png" style="display: none;">
+<img id="source" src="../img/1.jpg" style="display: none;">
+</body>
+</html>

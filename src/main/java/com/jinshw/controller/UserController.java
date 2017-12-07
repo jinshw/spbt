@@ -39,8 +39,8 @@ public class UserController {
     @RequestMapping("userlist")
     public String hello(ModelMap model) {
         model.put("time", new Date());
-        model.put("message", "testgggggg");
-        model.put("age",51288);
+        model.put("message", "tewewqw12342");
+        model.put("age",5122);
         return "/pages/userlist";
     }
 }
